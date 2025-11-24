@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import exercises from "../assets/data/exercises.json";
 import ExerciseListItem from "../components/ExerciseListItem";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -22,7 +22,7 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "gainsboro",
+    backgroundColor: "ghostwhite",
     justifyContent: "center",
     padding: 10,
   }
