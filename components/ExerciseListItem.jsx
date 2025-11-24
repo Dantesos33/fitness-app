@@ -1,13 +1,16 @@
-import { View, Text, StyleSheet } from "react-native";
+import { Pressable, Text, StyleSheet } from "react-native";
 import capitalizeFirstLetter from "../utils/helperFunctions";
+import { Link } from "expo-router";
 
 const ExerciseListItem = ({ item }) => (
-  <View style={styles.exerciseContainer}>
+  <Link href={`/${item.name}`} asChild>
+  <Pressable style={styles.exerciseContainer}>
     <Text style={styles.exerciseName}>{item.name}</Text>
     <Text style={styles.exerciseSubtitle}>
       {capitalizeFirstLetter(item.muscle)} | {capitalizeFirstLetter(item.equipment)}
     </Text>
-  </View>
+  </Pressable>
+  </Link>
 );
 
 const styles = StyleSheet.create({
