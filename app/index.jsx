@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import exercises from "../assets/data/exercises.json";
+import ExerciseListItem from "../components/ExerciseListItem";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {
   return (
-    <View style={styles.container}>
-      <Text>This is home</Text>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={exercises}
+        contentContainerStyle={{ gap: 5 }}
+        keyExtractor={(item, index) => item.name + index}
+        renderItem={({ item }) => <ExerciseListItem item={item} />}
+      />
+
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "gainsboro",
+    justifyContent: "center",
+    padding: 10,
+  }
 });
