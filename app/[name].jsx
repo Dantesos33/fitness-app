@@ -3,9 +3,11 @@ import { useLocalSearchParams } from "expo-router";
 import exercises from "../assets/data/exercises.json";
 import capitalizeFirstLetter from "../utils/helperFunctions";
 import { Stack } from "expo-router";
+import { useState } from "react";
 
 const ExerciseDetailsScreen = () => {
   const { name } = useLocalSearchParams();
+  const [isExpanded, setIsExpanded] = useState(false);
   const exercise = exercises.find((ex) => ex.name === name);
 
   if (!exercise) {
@@ -28,7 +30,8 @@ const ExerciseDetailsScreen = () => {
         </Text>
       </View>
       <View style={styles.panel}>
-        <Text style={styles.instructions}>{exercise.instructions}</Text>
+        <Text style={styles.instructions} numberOfLines={isExpanded ? 0 : 3}>{exercise.instructions}</Text>
+        <Text onPress={() => setIsExpanded(!isExpanded)} style={styles.seeMore}>{isExpanded ? 'See less': 'See more'}</Text>
       </View>
     </ScrollView>
   );
@@ -55,6 +58,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 22,
   },
+  seeMore: {
+    alignSelf: "center",
+    padding: 10,
+    color: "gray",
+    fontWeight: "600",
+  }
 });
 
 export default ExerciseDetailsScreen;
