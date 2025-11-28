@@ -1,11 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import exercises from "../assets/data/exercises.json";
 import ExerciseListItem from "../components/ExerciseListItem";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ExerciseScreen() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+
       <FlatList
         data={exercises}
         contentContainerStyle={{ gap: 5 }}
@@ -14,7 +16,7 @@ export default function ExerciseScreen() {
       />
 
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 

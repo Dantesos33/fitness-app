@@ -4,6 +4,7 @@ import exercises from "../assets/data/exercises.json";
 import capitalizeFirstLetter from "../utils/helperFunctions";
 import { Stack } from "expo-router";
 import { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const ExerciseDetailsScreen = () => {
   const { name } = useLocalSearchParams();
@@ -15,6 +16,7 @@ const ExerciseDetailsScreen = () => {
   }
 
   return (
+    <SafeAreaView>
     <ScrollView contentContainerStyle={styles.container}>
       <Stack.Screen
         options={{
@@ -34,6 +36,7 @@ const ExerciseDetailsScreen = () => {
         <Text onPress={() => setIsExpanded(!isExpanded)} style={styles.seeMore}>{isExpanded ? 'See less': 'See more'}</Text>
       </View>
     </ScrollView>
+    </SafeAreaView>
   );
 };
 

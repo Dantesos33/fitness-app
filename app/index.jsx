@@ -2,10 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp} from "react-native-responsive-screen";
 
 export default function Home() {
   const router = useRouter();
@@ -19,7 +16,7 @@ export default function Home() {
       />
       <LinearGradient
         colors={["transparent", "#18181b"]}
-        style={{ width: wp(100), height: hp(70), display: "flex", justifyContent: "flex-end", paddingBottom: 50, marginVertical: "28px" }}
+        style={{ width: wp(100), height: hp(70), display: "flex", justifyContent: "flex-end", paddingBottom: 50 }}
         start={{x: 0.5, y: 0}}
         end={{x: 0.5, y: 0.8}}
       >
