@@ -1,15 +1,38 @@
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import exercises from "../assets/data/exercises.json";
+import * as FileSystem from "expo-file-system/legacy";
 import capitalizeFirstLetter from "../utils/helperFunctions";
 import { Stack } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const ExerciseDetailsScreen = () => {
   const { name } = useLocalSearchParams();
+  const [exercise, setExercise] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
-  const exercise = exercises.find((ex) => ex.name === name);
+
+  useEffect(() => {
+    const loadExercise = async () => {
+      // Search in user file first, then fallback to built-in
+      try {
+        const filePath = FileSystem.documentDirectory + "user_exercises.json";
+        const fileInfo = await FileSystem.getInfoAsync(filePath);
+        if (fileInfo.exists) {
+          const content = await FileSystem.readAsStringAsync(filePath);
+          const userExercises = JSON.parse(content || "[]");
+          const foundUser = userExercises.find((ex) => ex.name === name);
+          if (foundUser) {
+            setExercise(foundUser);
+            return;
+          }
+        }
+      } catch {}
+      const builtIn = exercises.find((ex) => ex.name === name);
+      setExercise(builtIn || null);
+    };
+    loadExercise();
+  }, [name]);
 
   if (!exercise) {
     return <Text>Exercise not found</Text>;
